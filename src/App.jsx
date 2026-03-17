@@ -145,7 +145,7 @@ const WelcomeScreen = ({ onNext }) => (
       <Heart className="main-heart" />
     </div>
     <h1 className="screen-title">
-      My Dearest Shiv...
+      Hy  Shiv Nikosm okati chesa chuduu...
     </h1>
     <p className="screen-subtitle">
       We've built such a beautiful life together, but I have one more surprise for you.
@@ -164,7 +164,7 @@ const MemoryScreen = ({ onNext }) => (
   <div className="screen memory-screen">
     <h2 className="screen-heading">
       <Camera className="section-icon" />
-      Our Beautiful Journey
+      Our Beautiful Journey 
     </h2>
     <div className="photo-grid">
       <div className="photo-card">
@@ -196,15 +196,15 @@ const LoveLetterScreen = ({ onNext }) => (
     <ul className="love-list">
       <li className="love-item">
         <Heart className="list-icon" />
-        <span>Your smile brightens even my darkest days, Shiv.</span>
+        <span>Andukante nuvvante naku chachentha Estam and e kinda chaduvu </span>
       </li>
       <li className="love-item">
         <Heart className="list-icon" />
-        <span>The way you love and care for me makes me the luckiest person alive.</span>
+        <span>Niku kopm akko but danni control chesentha naku ledu but aaa kopm lo nu chupinche prema chaluu and aa kopanni feture control cheseantha naku access estv ani anukuntunna. i hope we are the fighters and lovers and husband and wife etc.elane kalsi vundam jaldi pelli cheskondm shivvu .</span>
       </li>
       <li className="love-item">
         <Heart className="list-icon" />
-        <span>I want to hold your hand through all of life's beautiful adventures.</span>
+        <span>And gurthupetko manam chala kastalu edurkonnm alane mundu enka chala vunnay danni face cheddm ni venuka nen vunta so asal bayapadaddu asal taggedele  e madyla adho ni time na time baleka chala godavalu misunderstandings anni set cheddm manchiga vundam ree chittyluu.</span>
       </li>
     </ul>
     <button 
