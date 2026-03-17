@@ -1,6 +1,48 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Heart, Stars, Music, ChevronRight, Camera, Sparkles } from 'lucide-react';
 import './styles.css';
+import love1 from "./assets/love1.jpg";
+import love2 from "./assets/love2.jpg";
+
+// --- Login Screen Component ---
+const LoginScreen = ({ onLogin }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogin = () => {
+    if (username === 'admin' && password === 'admin123') {
+      onLogin();
+    } else {
+      setError('Invalid credentials');
+    }
+  };
+
+  return (
+    <div className="screen login-screen">
+      <h1 className="screen-title">Welcome</h1>
+      <p className="screen-subtitle">Please login to continue</p>
+      <div className="login-form">
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="login-input"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="login-input"
+        />
+        {error && <p className="error-message">{error}</p>}
+        <button onClick={handleLogin} className="primary-button">Login</button>
+      </div>
+    </div>
+  );
+};
 
 // --- Background Floating Hearts Component ---
 const FloatingHearts = () => {
@@ -44,6 +86,7 @@ const FloatingHearts = () => {
 export default function App() {
   const [step, setStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const audioRef = useRef(null);
 
   // You can replace this URL with your partner's favorite romantic song
@@ -69,21 +112,27 @@ export default function App() {
       {/* Hidden Audio Element */}
       <audio ref={audioRef} src={audioUrl} loop />
 
-      {/* Music Toggle */}
-      <button 
-        onClick={toggleMusic}
-        className="music-toggle"
-      >
-        <Music className={`music-icon ${isPlaying ? 'playing' : ''}`} />
-      </button>
-
       {/* Content Container */}
       <div className="content-container">
-        {step === 0 && <WelcomeScreen onNext={nextStep} />}
-        {step === 1 && <MemoryScreen onNext={nextStep} />}
-        {step === 2 && <LoveLetterScreen onNext={nextStep} />}
-        {step === 3 && <ProposalScreen onNext={nextStep} />}
-        {step === 4 && <SuccessScreen />}
+        {!isLoggedIn ? (
+          <LoginScreen onLogin={() => setIsLoggedIn(true)} />
+        ) : (
+          <>
+            {/* Music Toggle */}
+            <button 
+              onClick={toggleMusic}
+              className="music-toggle"
+            >
+              <Music className={`music-icon ${isPlaying ? 'playing' : ''}`} />
+            </button>
+
+            {step === 0 && <WelcomeScreen onNext={nextStep} />}
+            {step === 1 && <MemoryScreen onNext={nextStep} />}
+            {step === 2 && <LoveLetterScreen onNext={nextStep} />}
+            {step === 3 && <ProposalScreen onNext={nextStep} />}
+            {step === 4 && <SuccessScreen />}
+          </>
+        )}
       </div>
     </div>
   );
@@ -118,14 +167,13 @@ const MemoryScreen = ({ onNext }) => (
     </h2>
     <div className="photo-grid">
       <div className="photo-card">
-        <div className="photo-wrapper">
-           <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=400" alt="romantic" className="photo-image" />
-        </div>
-      </div>
-      <div className="photo-card">
-        <div className="photo-wrapper">
-           <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&q=80&w=400" alt="holding hands" className="photo-image" />
-        </div>
+      <div className="photo-wrapper">
+  <img src={love1} alt="romantic" className="photo-image" />
+</div>
+
+<div className="photo-wrapper">
+  <img src={love2} alt="holding hands" className="photo-image" />
+</div>
       </div>
     </div>
     <p className="quote-text">
