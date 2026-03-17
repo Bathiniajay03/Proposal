@@ -3,6 +3,7 @@ import { Heart, Stars, Music, ChevronRight, Camera, Sparkles } from 'lucide-reac
 import './styles.css';
 import love1 from "./assets/love1.jpg";
 import love2 from "./assets/love2.jpg";
+import loveimg3 from "./assets/loveimg3.png";
 
 // --- Login Screen Component ---
 const LoginScreen = ({ onLogin }) => {
@@ -234,11 +235,11 @@ const ProposalScreen = ({ onNext }) => {
   return (
     <div className="screen proposal-screen">
       <div className="ring-image-container">
-        <img 
-          src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=600" 
-          alt="Rings" 
-          className="ring-image"
-        />
+       <img 
+  src={loveimg3}
+  alt="Rings" 
+  className="ring-image"
+/>
       </div>
       <h1 className="proposal-title">
         Shivani, will you marry me? 💍
