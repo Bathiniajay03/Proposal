@@ -145,7 +145,7 @@ const WelcomeScreen = ({ onNext }) => (
       <Heart className="main-heart" />
     </div>
     <h1 className="screen-title">
-      My Dearest Shivani...
+      My Dearest Shiv...
     </h1>
     <p className="screen-subtitle">
       We've built such a beautiful life together, but I have one more surprise for you.
@@ -184,7 +184,7 @@ const MemoryScreen = ({ onNext }) => (
       onClick={onNext}
       className="secondary-button"
     >
-      Next Chapter
+      Enka kavala
     </button>
   </div>
 );
@@ -196,7 +196,7 @@ const LoveLetterScreen = ({ onNext }) => (
     <ul className="love-list">
       <li className="love-item">
         <Heart className="list-icon" />
-        <span>Your smile brightens even my darkest days, Shivani.</span>
+        <span>Your smile brightens even my darkest days, Shiv.</span>
       </li>
       <li className="love-item">
         <Heart className="list-icon" />
@@ -242,7 +242,7 @@ const ProposalScreen = ({ onNext }) => {
 />
       </div>
       <h1 className="proposal-title">
-        Shivani, will you marry me? 💍
+        Shiv, will you marry me? 💍
       </h1>
       
       <div className="button-group">
@@ -272,10 +272,10 @@ const SuccessScreen = () => {
     <div className="screen success-screen">
       <Sparkles className="success-sparkles" />
       <h1 className="success-title">
-        SHE SAID YES! 🎉
+        YAHOOO SHIV 🎉
       </h1>
       <p className="success-message">
-        I can't wait to spend the rest of my life with you.
+     Mari appudu cheskondm pellii im waiting for u mummy jaldi chesko nannu pleseee.
       </p>
       <div className="success-heart-container">
         <Heart className="success-heart" />
