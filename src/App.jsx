@@ -1,0 +1,236 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { Heart, Stars, Music, ChevronRight, Camera, Sparkles } from 'lucide-react';
+import './styles.css';
+
+// --- Background Floating Hearts Component ---
+const FloatingHearts = () => {
+  const [hearts, setHearts] = useState([]);
+
+  useEffect(() => {
+    const generateHearts = () => {
+      const newHearts = Array.from({ length: 15 }).map((_, i) => ({
+        id: i,
+        left: Math.random() * 100,
+        animationDuration: 10 + Math.random() * 20,
+        delay: Math.random() * 10,
+        size: 10 + Math.random() * 20,
+      }));
+      setHearts(newHearts);
+    };
+    generateHearts();
+  }, []);
+
+  return (
+    <div className="floating-hearts-container">
+      {hearts.map((heart) => (
+        <div
+          key={heart.id}
+          className="floating-heart"
+          style={{
+            left: `${heart.left}%`,
+            animationDuration: `${heart.animationDuration}s`,
+            animationDelay: `${heart.delay}s`,
+            fontSize: `${heart.size}px`,
+          }}
+        >
+          <Heart fill="currentColor" />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// --- Main App Component ---
+export default function App() {
+  const [step, setStep] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
+
+  // You can replace this URL with your partner's favorite romantic song
+  const audioUrl = "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-acoustic-guitar-background-music-111056.mp3";
+
+  const toggleMusic = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const nextStep = () => setStep(step + 1);
+
+  return (
+    <div className="app-container">
+      <FloatingHearts />
+      
+      {/* Hidden Audio Element */}
+      <audio ref={audioRef} src={audioUrl} loop />
+
+      {/* Music Toggle */}
+      <button 
+        onClick={toggleMusic}
+        className="music-toggle"
+      >
+        <Music className={`music-icon ${isPlaying ? 'playing' : ''}`} />
+      </button>
+
+      {/* Content Container */}
+      <div className="content-container">
+        {step === 0 && <WelcomeScreen onNext={nextStep} />}
+        {step === 1 && <MemoryScreen onNext={nextStep} />}
+        {step === 2 && <LoveLetterScreen onNext={nextStep} />}
+        {step === 3 && <ProposalScreen onNext={nextStep} />}
+        {step === 4 && <SuccessScreen />}
+      </div>
+    </div>
+  );
+}
+
+const WelcomeScreen = ({ onNext }) => (
+  <div className="screen welcome-screen">
+    <div className="heart-container">
+      <Heart className="main-heart" />
+    </div>
+    <h1 className="screen-title">
+      My Dearest Shivani...
+    </h1>
+    <p className="screen-subtitle">
+      We've built such a beautiful life together, but I have one more surprise for you.
+    </p>
+    <button 
+      onClick={onNext}
+      className="primary-button"
+    >
+      Relive Our Magic
+      <ChevronRight className="button-icon" />
+    </button>
+  </div>
+);
+
+const MemoryScreen = ({ onNext }) => (
+  <div className="screen memory-screen">
+    <h2 className="screen-heading">
+      <Camera className="section-icon" />
+      Our Beautiful Journey
+    </h2>
+    <div className="photo-grid">
+      <div className="photo-card">
+        <div className="photo-wrapper">
+           <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=400" alt="romantic" className="photo-image" />
+        </div>
+      </div>
+      <div className="photo-card">
+        <div className="photo-wrapper">
+           <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&q=80&w=400" alt="holding hands" className="photo-image" />
+        </div>
+      </div>
+    </div>
+    <p className="quote-text">
+      "Shivani, every day with you is a dream I never want to wake up from. You've made my world infinitely more beautiful since the day you became mine."
+    </p>
+    <button 
+      onClick={onNext}
+      className="secondary-button"
+    >
+      Next Chapter
+    </button>
+  </div>
+);
+
+const LoveLetterScreen = ({ onNext }) => (
+  <div className="screen love-letter-screen">
+    <Stars className="stars-icon" />
+    <h2 className="screen-title">Why You Are My Everything</h2>
+    <ul className="love-list">
+      <li className="love-item">
+        <Heart className="list-icon" />
+        <span>Your smile brightens even my darkest days, Shivani.</span>
+      </li>
+      <li className="love-item">
+        <Heart className="list-icon" />
+        <span>The way you love and care for me makes me the luckiest person alive.</span>
+      </li>
+      <li className="love-item">
+        <Heart className="list-icon" />
+        <span>I want to hold your hand through all of life's beautiful adventures.</span>
+      </li>
+    </ul>
+    <button 
+      onClick={onNext}
+      className="gradient-button"
+    >
+      I have one question...
+    </button>
+  </div>
+);
+
+const ProposalScreen = ({ onNext }) => {
+  const [noStyle, setNoStyle] = useState({});
+  const [yesScale, setYesScale] = useState(1);
+
+  const handleNoHover = () => {
+    const randomX = Math.floor(Math.random() * 200) - 100;
+    const randomY = Math.floor(Math.random() * 200) - 100;
+    
+    setNoStyle({
+      transform: `translate(${randomX}px, ${randomY}px)`,
+      transition: 'all 0.2s ease-out'
+    });
+    
+    setYesScale(prev => Math.min(prev + 0.2, 2.5)); 
+  };
+
+  return (
+    <div className="screen proposal-screen">
+      <div className="ring-image-container">
+        <img 
+          src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=600" 
+          alt="Rings" 
+          className="ring-image"
+        />
+      </div>
+      <h1 className="proposal-title">
+        Shivani, will you marry me? 💍
+      </h1>
+      
+      <div className="button-group">
+        <button 
+          onClick={onNext}
+          style={{ transform: `scale(${yesScale})` }}
+          className="yes-button"
+        >
+          YES! ❤️
+        </button>
+        
+        <button 
+          onMouseEnter={handleNoHover}
+          onClick={handleNoHover}
+          style={noStyle}
+          className="no-button"
+        >
+          No
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const SuccessScreen = () => {
+  return (
+    <div className="screen success-screen">
+      <Sparkles className="success-sparkles" />
+      <h1 className="success-title">
+        SHE SAID YES! 🎉
+      </h1>
+      <p className="success-message">
+        I can't wait to spend the rest of my life with you.
+      </p>
+      <div className="success-heart-container">
+        <Heart className="success-heart" />
+      </div>
+    </div>
+  );
+};

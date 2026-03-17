@@ -1,0 +1,640 @@
+/* ========================================
+   GLOBAL STYLES & ANIMATIONS
+   ======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #f43f5e;
+  --secondary-color: #be185d;
+  --accent-color: #e11d48;
+  --light-pink: #fdf2f8;
+  --medium-pink: #fbcfe8;
+  --dark-rose: #be123c;
+  --white: #ffffff;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  --smooth-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Floating Hearts Animation */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Spin Animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========================================
+   APP CONTAINER
+   ======================================== */
+
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #fdf2f8, #fbcfe8, #fecdd3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow: hidden;
+  color: #be123c;
+}
+
+/* ========================================
+   FLOATING HEARTS
+   ======================================== */
+
+.floating-hearts-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -10%;
+  color: #fbcfe8;
+  opacity: 0.5;
+  animation: floatUp linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========================================
+   MUSIC TOGGLE BUTTON
+   ======================================== */
+
+.music-toggle {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: var(--smooth-transition);
+  backdrop-filter: blur(4px);
+}
+
+.music-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.2);
+}
+
+.music-icon {
+  width: 24px;
+  height: 24px;
+  color: #999;
+  transition: var(--smooth-transition);
+}
+
+.music-icon.playing {
+  animation: pulse 1s infinite;
+  color: var(--primary-color);
+}
+
+/* ========================================
+   CONTENT CONTAINER
+   ======================================== */
+
+.content-container {
+  z-index: 10;
+  width: 100%;
+  max-width: 800px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+/* ========================================
+   SCREEN STYLES
+   ======================================== */
+
+.screen {
+  width: 100%;
+  text-align: center;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Welcome Screen */
+.welcome-screen {
+  /* inherit from .screen */
+}
+
+.heart-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.main-heart {
+  width: 80px;
+  height: 80px;
+  color: #ef4444;
+  animation: bounce 1s infinite;
+  fill: currentColor;
+}
+
+.screen-title {
+  font-size: clamp(2rem, 8vw, 3.75rem);
+  font-weight: 900;
+  margin-bottom: 1rem;
+  color: var(--dark-rose);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.screen-subtitle {
+  font-size: clamp(1rem, 5vw, 1.5rem);
+  margin-bottom: 2.5rem;
+  color: #be185d;
+  font-weight: 300;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.primary-button {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.3);
+  transition: var(--smooth-transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  outline: none;
+}
+
+.primary-button:hover {
+  background-color: var(--secondary-color);
+  box-shadow: 0 12px 32px rgba(244, 63, 94, 0.4);
+  transform: translateY(-2px);
+}
+
+.primary-button:active {
+  transform: translateY(0);
+}
+
+.secondary-button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  background-color: var(--white);
+  border: 1px solid #fbcfe8;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: var(--smooth-transition);
+  outline: none;
+}
+
+.secondary-button:hover {
+  background-color: #fdf2f8;
+  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.2);
+  transform: translateY(-2px);
+}
+
+.gradient-button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  background: linear-gradient(135deg, #f43f5e, #ef4444);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+  transition: var(--smooth-transition);
+  outline: none;
+}
+
+.gradient-button:hover {
+  box-shadow: 0 12px 28px rgba(239, 68, 68, 0.4);
+  transform: scale(1.05);
+}
+
+.button-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.yes-button {
+  padding: 1rem 2.5rem;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--white);
+  background-color: #22c55e;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 12px 32px rgba(34, 197, 94, 0.3);
+  transition: var(--smooth-transition);
+  outline: none;
+  z-index: 20;
+}
+
+.yes-button:hover {
+  background-color: #16a34a;
+  box-shadow: 0 16px 40px rgba(34, 197, 94, 0.4);
+}
+
+.no-button {
+  padding: 1rem 2.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--white);
+  background-color: #9ca3af;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: var(--smooth-transition);
+  outline: none;
+  white-space: nowrap;
+  z-index: 10;
+  position: relative;
+}
+
+.no-button:hover {
+  background-color: #6b7280;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   MEMORY SCREEN
+   ======================================== */
+
+.memory-screen {
+  width: 100%;
+}
+
+.screen-heading {
+  font-size: clamp(1.75rem, 6vw, 2.25rem);
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--dark-rose);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.section-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--primary-color);
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.photo-card {
+  background-color: var(--white);
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  transform: rotate(-2deg);
+  transition: var(--smooth-transition);
+}
+
+.photo-card:nth-child(2) {
+  transform: rotate(3deg);
+}
+
+.photo-card:hover {
+  transform: rotate(0deg);
+  box-shadow: 0 12px 32px rgba(244, 63, 94, 0.15);
+}
+
+.photo-wrapper {
+  aspect-ratio: 1;
+  background-color: #fdf2f8;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.photo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  transition: var(--smooth-transition);
+}
+
+.photo-card:hover .photo-image {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.quote-text {
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  color: #be185d;
+  font-style: italic;
+  line-height: 1.8;
+  opacity: 0.95;
+}
+
+/* ========================================
+   LOVE LETTER SCREEN
+   ======================================== */
+
+.love-letter-screen {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.stars-icon {
+  width: 48px;
+  height: 48px;
+  color: #fbbf24;
+  margin: 0 auto 1.5rem;
+  animation: spin 8s linear infinite;
+}
+
+.love-list {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.love-item {
+  display: flex;
+  gap: 1rem;
+}
+
+.list-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--primary-color);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  fill: currentColor;
+}
+
+.love-item span {
+  font-size: 1.125rem;
+  color: #be185d;
+  line-height: 1.6;
+}
+
+/* ========================================
+   PROPOSAL SCREEN
+   ======================================== */
+
+.proposal-screen {
+  width: 100%;
+}
+
+.ring-image-container {
+  margin-bottom: 2rem;
+}
+
+.ring-image {
+  width: 192px;
+  height: 192px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 20px 40px rgba(244, 63, 94, 0.2);
+  border: 4px solid var(--white);
+  margin: 0 auto;
+  display: block;
+}
+
+.proposal-title {
+  font-size: clamp(2rem, 10vw, 3.75rem);
+  font-weight: 900;
+  margin-bottom: 3rem;
+  color: var(--dark-rose);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+  line-height: 1.2;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  position: relative;
+  min-height: 150px;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .button-group {
+    flex-direction: row;
+    gap: 3rem;
+  }
+}
+
+/* ========================================
+   SUCCESS SCREEN
+   ======================================== */
+
+.success-screen {
+  width: 100%;
+}
+
+.success-sparkles {
+  width: 96px;
+  height: 96px;
+  color: #fbbf24;
+  margin: 0 auto 1.5rem;
+  animation: spin 4s linear infinite;
+}
+
+.success-title {
+  font-size: clamp(2.5rem, 12vw, 4.5rem);
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.02em;
+}
+
+.success-message {
+  font-size: clamp(1.25rem, 5vw, 1.875rem);
+  margin-bottom: 2rem;
+  color: var(--dark-rose);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.success-heart-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.success-heart {
+  width: 128px;
+  height: 128px;
+  color: #ef4444;
+  animation: bounce 1s infinite;
+  fill: currentColor;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 640px) {
+  .content-container {
+    padding: 1rem;
+    min-height: auto;
+  }
+
+  .photo-grid {
+    gap: 0.5rem;
+  }
+
+  .love-letter-screen {
+    padding: 1.5rem;
+  }
+
+  .screen-title {
+    font-size: 2rem;
+  }
+
+  .screen-subtitle {
+    font-size: 1rem;
+  }
+
+  .proposal-title {
+    font-size: 2rem;
+  }
+
+  .yes-button,
+  .no-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .primary-button,
+  .secondary-button,
+  .gradient-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+button:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
