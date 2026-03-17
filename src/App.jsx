@@ -11,7 +11,7 @@ const LoginScreen = ({ onLogin }) => {
   const [error, setError] = useState('');
 
   const handleLogin = () => {
-    if (username === 'admin' && password === 'admin123') {
+    if (username === 'shivvuajju' && password === '030816') {
       onLogin();
     } else {
       setError('Invalid credentials');
